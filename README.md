@@ -16,7 +16,6 @@ An internal workflow for processing messy legal documents, extracting structured
 3. Install dependencies:
    ```bash
    pip install -r requirements.txt
-   pip install langchain-huggingface
    ```
 4. Set up environment variables:
    Copy `.env.example` to `.env`. 
