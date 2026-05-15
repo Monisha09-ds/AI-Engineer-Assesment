@@ -1,0 +1,11 @@
+docling
+faiss-cpu
+anthropic
+google-generativeai
+langchain
+langchain-community
+sentence-transformers
+python-dotenv
+pydantic
+pypdf
+fpdf2
