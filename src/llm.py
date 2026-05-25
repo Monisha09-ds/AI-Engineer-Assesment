@@ -1,7 +1,5 @@
 import os
 from typing import List, Optional
-import google.generativeai as genai
-from anthropic import Anthropic
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,6 +10,8 @@ class LLMInterface:
 
 class GeminiWrapper(LLMInterface):
     def __init__(self, model_name: str = "gemini-1.5-flash"):
+        import google.generativeai as genai
+
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         self.model = genai.GenerativeModel(model_name)
 
@@ -22,6 +22,8 @@ class GeminiWrapper(LLMInterface):
 
 class AnthropicWrapper(LLMInterface):
     def __init__(self, model_name: str = "claude-3-5-sonnet-20240620"):
+        from anthropic import Anthropic
+
         self.client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
         self.model_name = model_name
 

@@ -4,11 +4,19 @@ from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document as LangChainDocument
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class VectorStoreManager:
     def __init__(self, index_path: str = "faiss_index"):
         self.index_path = index_path
-        self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+        hf_token = os.getenv("HF_TOKEN")
+        model_kwargs = {"token": hf_token} if hf_token else {}
+        self.embeddings = HuggingFaceEmbeddings(
+            model_name="all-MiniLM-L6-v2",
+            model_kwargs=model_kwargs,
+        )
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,
             chunk_overlap=100,

@@ -50,6 +50,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+test_faiss_index/
 
 # Translations
 *.mo
@@ -216,3 +217,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local application state and generated share exports
+faiss_index/
+data/memory.json
+data/test_memory.json
+exports/
+pwd/

@@ -14,9 +14,25 @@ class DocProcessor:
         
     def process(self, file_path: str) -> ProcessedDocument:
         """
-        Processes a document (PDF, Image, etc.) using Docling.
+        Processes a document (PDF, Image, Text, etc.) using Docling when available.
         """
         print(f"Processing document: {file_path}")
+        extension = os.path.splitext(file_path)[1].lower()
+
+        if extension == ".txt":
+            with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+                markdown_content = f.read()
+            metadata = {
+                "source": os.path.basename(file_path),
+                "pages": 1,
+                "format": extension,
+            }
+            return ProcessedDocument(
+                file_path=file_path,
+                content=markdown_content,
+                metadata=metadata
+            )
+
         result = self.converter.convert(file_path)
         
         # Exporting to markdown for better RAG performance
@@ -26,7 +42,7 @@ class DocProcessor:
         metadata = {
             "source": os.path.basename(file_path),
             "pages": len(result.document.pages) if hasattr(result.document, 'pages') else 1,
-            "format": os.path.splitext(file_path)[1]
+            "format": extension
         }
         
         return ProcessedDocument(
@@ -41,7 +57,7 @@ class DocProcessor:
         """
         processed_docs = []
         for filename in os.listdir(directory_path):
-            if filename.endswith(('.pdf', '.docx', '.pptx', '.png', '.jpg', '.jpeg')):
+            if filename.endswith(('.pdf', '.docx', '.pptx', '.png', '.jpg', '.jpeg', '.txt')):
                 file_path = os.path.join(directory_path, filename)
                 try:
                     doc = self.process(file_path)

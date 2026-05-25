@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal AI Workflow</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Legal AI Workflow</h1>
+      <p>A browser-based UI for the legal document ingestion, retrieval, drafting, and feedback loop pipeline.</p>
+    </header>
+
+    <section class="panel">
+      <h2>1. Document Processing</h2>
+      <button id="processBtn">Process Sample Documents</button>
+      <div id="documentList" class="info"></div>
+    </section>
+
+    <section class="panel">
+      <h2>2. Generate Draft</h2>
+      <label for="queryInput">Query</label>
+      <textarea id="queryInput">Summarize the Preliminary Title Report for 789 Harvey Specter Lane.</textarea>
+      <button id="draftBtn">Generate Draft</button>
+      <div class="output-group">
+        <h3>Draft Output</h3>
+        <pre id="draftOutput">The generated draft will appear here...</pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>3. Feedback Loop</h2>
+      <label for="editedDraftInput">Edited Draft</label>
+      <textarea id="editedDraftInput" placeholder="Paste your corrected draft here..."></textarea>
+      <button id="feedbackBtn">Submit Feedback</button>
+      <div class="output-group">
+        <h3>Feedback Result</h3>
+        <pre id="feedbackOutput">Feedback results will appear here.</pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Current Insights</h2>
+      <pre id="insightsOutput">No insights loaded yet.</pre>
+    </section>
+
+    <section class="panel small-panel">
+      <h2>Service Status</h2>
+      <pre id="statusOutput">Loading status...</pre>
+    </section>
+  </div>
+  <script src="/static/main.js"></script>
+</body>
+</html>

@@ -16,11 +16,11 @@ An internal workflow for processing messy legal documents, extracting structured
 3. Install dependencies:
    ```bash
    pip install -r requirements.txt
-   pip install langchain-huggingface
    ```
 4. Set up environment variables:
    Copy `.env.example` to `.env`. 
    *Note: By default, the system is configured to use a `MockLLMWrapper` (`MODEL_PROVIDER=mock`) due to recent Google API rate limit / quota exhaustion. To use a real model, change the provider to `google` or `anthropic` and provide the respective API key.*
+   Add `HF_TOKEN` to `.env` to authenticate Hugging Face model downloads used by the vector store.
 
 ## Run Instructions
 
@@ -31,8 +31,32 @@ An internal workflow for processing messy legal documents, extracting structured
    ```
 2. **Run Tests**:
    ```bash
-   python src/test_suite.py
+   python -m unittest discover -s tests -t . -p "test_*.py"
    ```
+3. **Start the API and Web UI**:
+   ```bash
+   python src/api.py
+   ```
+   Then open `http://localhost:8000` in your browser.
+
+## API and Web UI
+- `GET /api/status` — service health, document list, vector store state, and insights count.
+- `POST /api/process` — process documents and build the FAISS index.
+- `POST /api/draft` — generate a grounded draft for a query.
+- `POST /api/feedback` — submit an edited draft and save learned insights.
+- `GET /api/insights` — show current feedback memory.
+- `GET /` or `GET /static/index.html` — open the frontend workflow UI.
+
+The web UI walks through the pipeline:
+1. Process sample documents.
+2. Generate a draft from a legal query.
+3. Edit the draft and submit feedback.
+4. View the learned insights injected into future drafts.
+
+## Test Layout
+- `tests/unit/` validates isolated feedback and vector-store configuration behavior.
+- `tests/smoke/` checks that the processor and API status endpoint initialize successfully.
+- `tests/integration/` builds and queries a real FAISS vector store using local embeddings.
 
 ## Architecture Overview
 
