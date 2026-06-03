@@ -1,10 +1,11 @@
 import os
-from typing import List
+from typing import Any, List
+
+from dotenv import load_dotenv
 from langchain_community.vectorstores import FAISS
+from langchain_core.documents import Document as LangChainDocument
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_core.documents import Document as LangChainDocument
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -24,7 +25,7 @@ class VectorStoreManager:
         )
         self.vector_store = None
 
-    def add_documents(self, documents: List[any]):
+    def add_documents(self, documents: List[Any]):
         """
         Converts custom ProcessedDocument to LangChain Documents and adds to FAISS.
         """

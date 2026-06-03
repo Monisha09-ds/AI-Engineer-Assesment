@@ -1,7 +1,9 @@
 import os
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 from docling.document_converter import DocumentConverter
 from pydantic import BaseModel
+
 
 class ProcessedDocument(BaseModel):
     file_path: str

@@ -2,6 +2,8 @@
 
 An internal workflow for processing messy legal documents, extracting structured information, performing grounded retrieval, and generating drafts that improve over time via a feedback loop.
 
+Current project version: `0.1.0`
+
 ## Setup Instructions
 
 1. Clone the repository and navigate into the directory.
@@ -32,6 +34,15 @@ An internal workflow for processing messy legal documents, extracting structured
 2. **Run Tests**:
    ```bash
    python -m unittest discover -s tests -t . -p "test_*.py"
+   ```
+   For CI-friendly local checks without external model downloads:
+   ```bash
+   python -m unittest discover -s tests/unit -t . -p "test_*.py"
+   python -m unittest discover -s tests/smoke -t . -p "test_*.py"
+   ```
+   Run the lint gate:
+   ```bash
+   python -m ruff check src tests
    ```
 3. **Start the API and Web UI**:
    ```bash

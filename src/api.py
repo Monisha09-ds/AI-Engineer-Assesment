@@ -5,18 +5,20 @@ from typing import List, Optional
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, RedirectResponse
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+
+from version import __version__
 
 # Use mock LLM by default for local demo if MODEL_PROVIDER is not set.
 if os.getenv("MODEL_PROVIDER") is None:
     os.environ["MODEL_PROVIDER"] = "mock"
 
-from processor import DocProcessor
-from vector_store import VectorStoreManager
 from drafter import Drafter
 from feedback import FeedbackLoop
+from processor import DocProcessor
+from vector_store import VectorStoreManager
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SAMPLE_DOCUMENTS_DIR = BASE_DIR / "data" / "sample_documents"
@@ -26,7 +28,7 @@ INDEX_PATH = BASE_DIR / "faiss_index"
 app = FastAPI(
     title="Legal AI Workflow API",
     description="API for the Pearson Specter Litt legal AI workflow.",
-    version="0.1.0",
+    version=__version__,
 )
 app.add_middleware(
     CORSMiddleware,
@@ -50,7 +52,7 @@ def list_documents() -> List[str]:
 
 
 def generate_sample_documents() -> List[str]:
-    from mock_generator import generate_messy_pdf, generate_handwritten_style_txt
+    from mock_generator import generate_handwritten_style_txt, generate_messy_pdf
 
     SAMPLE_DOCUMENTS_DIR.mkdir(parents=True, exist_ok=True)
     existing = list_documents()

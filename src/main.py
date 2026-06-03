@@ -1,9 +1,10 @@
 import os
-from mock_generator import generate_messy_pdf, generate_handwritten_style_txt
-from processor import DocProcessor
-from vector_store import VectorStoreManager
+
 from drafter import Drafter
 from feedback import FeedbackLoop
+from processor import DocProcessor
+from vector_store import VectorStoreManager
+
 
 def run_pipeline():
     print("--- Pearson Specter Litt: Legal AI Workflow ---")

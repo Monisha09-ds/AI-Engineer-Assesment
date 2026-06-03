@@ -1,5 +1,7 @@
 import os
+
 from fpdf import FPDF
+
 
 def generate_messy_pdf(output_path, text, title="Legal Document"):
     pdf = FPDF()

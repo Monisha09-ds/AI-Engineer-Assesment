@@ -1,6 +1,7 @@
-from vector_store import VectorStoreManager
-from llm import get_llm
 from feedback import FeedbackLoop
+from llm import get_llm
+from vector_store import VectorStoreManager
+
 
 class Drafter:
     def __init__(self, vector_store: VectorStoreManager, feedback_loop: FeedbackLoop = None):

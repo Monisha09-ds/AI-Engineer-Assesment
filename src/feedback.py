@@ -1,7 +1,9 @@
 import json
 import os
-from typing import List, Dict
+from typing import Dict, List
+
 from llm import get_llm
+
 
 class FeedbackLoop:
     def __init__(self, memory_path: str = "data/memory.json"):
