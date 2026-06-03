@@ -19,6 +19,10 @@ Current project version: `0.1.0`
    ```bash
    pip install -r requirements.txt
    ```
+   For local development and CI checks, also install dev dependencies:
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
 4. Set up environment variables:
    Copy `.env.example` to `.env`. 
    *Note: By default, the system is configured to use a `MockLLMWrapper` (`MODEL_PROVIDER=mock`) due to recent Google API rate limit / quota exhaustion. To use a real model, change the provider to `google` or `anthropic` and provide the respective API key.*
@@ -49,6 +53,15 @@ Current project version: `0.1.0`
    python src/api.py
    ```
    Then open `http://localhost:8000` in your browser.
+
+## CI
+
+GitHub Actions runs the CI gate on pushes and pull requests. The first CI
+workflow installs runtime and dev dependencies, runs Ruff, runs unit and smoke
+tests, and checks dependency consistency with `pip check`.
+
+The integration vector-store test is intentionally kept out of the default CI
+gate because it may require Hugging Face model download/cache access.
 
 ## API and Web UI
 - `GET /api/status` — service health, document list, vector store state, and insights count.
