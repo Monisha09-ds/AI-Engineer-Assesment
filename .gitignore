@@ -224,4 +224,5 @@ faiss_index/
 data/memory.json
 data/test_memory.json
 exports/
+docs/
 pwd/

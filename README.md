@@ -63,6 +63,28 @@ tests, and checks dependency consistency with `pip check`.
 The integration vector-store test is intentionally kept out of the default CI
 gate because it may require Hugging Face model download/cache access.
 
+## Docker
+
+Build the container image:
+```bash
+docker build -t legal-ai-workflow .
+```
+
+Run the container locally:
+```bash
+docker run --rm -p 8000:8000 legal-ai-workflow
+```
+
+Then open:
+```text
+http://localhost:8000/api/status
+```
+
+Run with Docker Compose:
+```bash
+docker compose up --build
+```
+
 ## API and Web UI
 - `GET /api/status` — service health, document list, vector store state, and insights count.
 - `POST /api/process` — process documents and build the FAISS index.
